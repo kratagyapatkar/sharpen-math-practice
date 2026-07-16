@@ -8,6 +8,7 @@ const state = {
   score: 0,
   wrongCount: 0,
   answered: false,
+  attempts: 0,
   startTime: null,
   elapsed: 0,
   timerInterval: null,
@@ -148,13 +149,15 @@ function renderQuestion() {
   feedback.textContent = '';
   feedback.className = 'q-feedback';
 
-  // next btn
+  // next & solve btns
   document.getElementById('btn-next').classList.add('hidden');
+  document.getElementById('btn-solve').classList.add('hidden');
 
   // options
   const grid = document.getElementById('options-grid');
   grid.innerHTML = '';
   state.answered = false;
+  state.attempts = 0;
 
   q.options.forEach((opt, i) => {
     const btn = document.createElement('button');
@@ -174,30 +177,59 @@ function renderQuestion() {
 // ── HANDLE ANSWER ──────────────────────────────────────────────────────────
 function handleAnswer(chosen, q) {
   if (state.answered) return;
-  state.answered = true;
 
   const correct = q.answer;
   const feedback = document.getElementById('q-feedback');
   const allBtns = document.querySelectorAll('.option-btn');
-
-  allBtns.forEach(btn => btn.disabled = true);
+  const btn = document.getElementById('opt-' + chosen);
 
   if (chosen === correct) {
+    state.answered = true;
+    allBtns.forEach(b => b.disabled = true);
     allBtns[correct].classList.add('correct');
-    state.score++;
+    
+    // Only count score if it was right on the first try, or maybe even on any try?
+    // Let's count it if they got it before failing the question.
+    if (state.attempts === 0) state.score++;
+    
     feedback.textContent = '✓ Correct!';
     feedback.className = 'q-feedback correct-msg';
+    document.getElementById('btn-next').classList.remove('hidden');
   } else {
-    allBtns[chosen].classList.add('wrong');
-    allBtns[correct].classList.add('correct');
-    state.wrongCount++;
-    feedback.textContent = '✗ The answer was: ' + q.options[correct];
-    feedback.className = 'q-feedback wrong-msg';
-    allBtns[chosen].classList.add('shake');
-  }
+    state.attempts++;
+    btn.classList.add('wrong');
+    btn.classList.add('shake');
+    btn.disabled = true;
 
-  document.getElementById('btn-next').classList.remove('hidden');
+    if (state.attempts >= 3) {
+      state.answered = true;
+      state.wrongCount++;
+      allBtns.forEach(b => b.disabled = true);
+      
+      feedback.textContent = 'Out of attempts! Click Solve to see the answer.';
+      feedback.className = 'q-feedback wrong-msg';
+      document.getElementById('btn-solve').classList.remove('hidden');
+    } else {
+      feedback.textContent = `✗ Incorrect. ${3 - state.attempts} attempts left.`;
+      feedback.className = 'q-feedback wrong-msg';
+    }
+  }
 }
+
+// ── SOLVE BUTTON ───────────────────────────────────────────────────────────
+document.getElementById('btn-solve').addEventListener('click', () => {
+  const q = state.questions[state.currentIdx];
+  const allBtns = document.querySelectorAll('.option-btn');
+  
+  allBtns[q.answer].classList.add('correct');
+  
+  const feedback = document.getElementById('q-feedback');
+  feedback.textContent = 'The correct answer is: ' + q.options[q.answer];
+  feedback.className = 'q-feedback correct-msg';
+
+  document.getElementById('btn-solve').classList.add('hidden');
+  document.getElementById('btn-next').classList.remove('hidden');
+});
 
 // ── NEXT QUESTION ──────────────────────────────────────────────────────────
 document.getElementById('btn-next').addEventListener('click', () => {
