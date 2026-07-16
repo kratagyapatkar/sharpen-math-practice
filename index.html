@@ -97,53 +97,7 @@
         <p class="q-text" id="q-text">Loading…</p>
       </div>
 
-      <!-- roots reference table (shown only for root questions) -->
-      <div class="ref-table-wrap hidden" id="ref-table-wrap">
-        <button class="ref-toggle" id="ref-toggle">📋 Reference Table <span id="ref-arrow">▸</span></button>
-        <div class="ref-table-body hidden" id="ref-table-body">
-          <div class="ref-cols">
-            <div class="ref-col">
-              <table class="ref-table">
-                <thead><tr><th>n</th><th>n²</th><th>√n²</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>1</td><td>1</td></tr>
-                  <tr><td>2</td><td>4</td><td>2</td></tr>
-                  <tr><td>3</td><td>9</td><td>3</td></tr>
-                  <tr><td>4</td><td>16</td><td>4</td></tr>
-                  <tr><td>5</td><td>25</td><td>5</td></tr>
-                  <tr><td>6</td><td>36</td><td>6</td></tr>
-                  <tr><td>7</td><td>49</td><td>7</td></tr>
-                  <tr><td>8</td><td>64</td><td>8</td></tr>
-                  <tr><td>9</td><td>81</td><td>9</td></tr>
-                  <tr><td>10</td><td>100</td><td>10</td></tr>
-                  <tr><td>11</td><td>121</td><td>11</td></tr>
-                  <tr><td>12</td><td>144</td><td>12</td></tr>
-                  <tr><td>13</td><td>169</td><td>13</td></tr>
-                  <tr><td>14</td><td>196</td><td>14</td></tr>
-                  <tr><td>15</td><td>225</td><td>15</td></tr>
-                </tbody>
-              </table>
-            </div>
-            <div class="ref-col">
-              <table class="ref-table">
-                <thead><tr><th>n</th><th>n³</th><th>∛n³</th></tr></thead>
-                <tbody>
-                  <tr><td>1</td><td>1</td><td>1</td></tr>
-                  <tr><td>2</td><td>8</td><td>2</td></tr>
-                  <tr><td>3</td><td>27</td><td>3</td></tr>
-                  <tr><td>4</td><td>64</td><td>4</td></tr>
-                  <tr><td>5</td><td>125</td><td>5</td></tr>
-                  <tr><td>6</td><td>216</td><td>6</td></tr>
-                  <tr><td>7</td><td>343</td><td>7</td></tr>
-                  <tr><td>8</td><td>512</td><td>8</td></tr>
-                  <tr><td>9</td><td>729</td><td>9</td></tr>
-                  <tr><td>10</td><td>1000</td><td>10</td></tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
-      </div>
+
 
       <div class="options-grid" id="options-grid">
         <!-- filled by JS -->
@@ -153,6 +107,54 @@
 
       <button class="next-btn hidden" id="btn-next">Next →</button>
     </main>
+
+    <!-- ── side reference table ── -->
+    <div class="ref-side-panel hidden" id="ref-table-wrap">
+      <button class="ref-toggle" id="ref-toggle"><span id="ref-arrow">◂</span> Table</button>
+      <div class="ref-table-body hidden" id="ref-table-body">
+        <div class="ref-cols">
+          <div class="ref-col">
+            <table class="ref-table">
+              <thead><tr><th>n</th><th>n²</th><th>√n²</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>2</td><td>4</td><td>2</td></tr>
+                <tr><td>3</td><td>9</td><td>3</td></tr>
+                <tr><td>4</td><td>16</td><td>4</td></tr>
+                <tr><td>5</td><td>25</td><td>5</td></tr>
+                <tr><td>6</td><td>36</td><td>6</td></tr>
+                <tr><td>7</td><td>49</td><td>7</td></tr>
+                <tr><td>8</td><td>64</td><td>8</td></tr>
+                <tr><td>9</td><td>81</td><td>9</td></tr>
+                <tr><td>10</td><td>100</td><td>10</td></tr>
+                <tr><td>11</td><td>121</td><td>11</td></tr>
+                <tr><td>12</td><td>144</td><td>12</td></tr>
+                <tr><td>13</td><td>169</td><td>13</td></tr>
+                <tr><td>14</td><td>196</td><td>14</td></tr>
+                <tr><td>15</td><td>225</td><td>15</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="ref-col">
+            <table class="ref-table">
+              <thead><tr><th>n</th><th>n³</th><th>∛n³</th></tr></thead>
+              <tbody>
+                <tr><td>1</td><td>1</td><td>1</td></tr>
+                <tr><td>2</td><td>8</td><td>2</td></tr>
+                <tr><td>3</td><td>27</td><td>3</td></tr>
+                <tr><td>4</td><td>64</td><td>4</td></tr>
+                <tr><td>5</td><td>125</td><td>5</td></tr>
+                <tr><td>6</td><td>216</td><td>6</td></tr>
+                <tr><td>7</td><td>343</td><td>7</td></tr>
+                <tr><td>8</td><td>512</td><td>8</td></tr>
+                <tr><td>9</td><td>729</td><td>9</td></tr>
+                <tr><td>10</td><td>1000</td><td>10</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- ── RESULTS SCREEN ── -->

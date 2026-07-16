@@ -78,9 +78,7 @@ document.querySelectorAll('#count-select .pill').forEach(pill => {
 // ── REFERENCE TABLE TOGGLE ─────────────────────────────────────────────────
 document.getElementById('ref-toggle').addEventListener('click', () => {
   const wrap = document.getElementById('ref-table-wrap');
-  const body = document.getElementById('ref-table-body');
   wrap.classList.toggle('open');
-  body.classList.toggle('hidden');
 });
 
 // ── START SESSION ──────────────────────────────────────────────────────────
@@ -135,17 +133,14 @@ function renderQuestion() {
 
   // show/hide reference table — only for Powers & Roots questions
   const refWrap = document.getElementById('ref-table-wrap');
-  const refBody = document.getElementById('ref-table-body');
   const isRootsQ = q.category === 'Powers & Roots';
   if (isRootsQ) {
     refWrap.classList.remove('hidden');
     // collapse it on each new question (let user toggle)
     refWrap.classList.remove('open');
-    refBody.classList.add('hidden');
   } else {
     refWrap.classList.add('hidden');
     refWrap.classList.remove('open');
-    refBody.classList.add('hidden');
   }
 
   // feedback reset
