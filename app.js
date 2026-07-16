@@ -204,7 +204,7 @@ function handleAnswer(chosen, q) {
     btn.classList.add('shake');
     btn.disabled = true;
 
-    if (state.attempts >= 3) {
+    if (state.attempts >= 2) {
       state.answered = true;
       state.wrongCount++;
       allBtns.forEach(b => b.disabled = true);
@@ -213,7 +213,7 @@ function handleAnswer(chosen, q) {
       feedback.className = 'q-feedback wrong-msg';
       document.getElementById('btn-solve').classList.remove('hidden');
     } else {
-      feedback.textContent = `✗ Incorrect. ${3 - state.attempts} attempts left.`;
+      feedback.textContent = `✗ Incorrect. ${2 - state.attempts} attempt left.`;
       feedback.className = 'q-feedback wrong-msg';
     }
   }
