@@ -149,6 +149,9 @@ function renderQuestion() {
   feedback.textContent = '';
   feedback.className = 'q-feedback';
 
+  // hide solution panel if it was open
+  document.getElementById('solution-panel').classList.remove('open');
+
   // next & solve btns
   document.getElementById('btn-next').classList.add('hidden');
   document.getElementById('btn-solve').classList.add('hidden');
@@ -216,6 +219,43 @@ function handleAnswer(chosen, q) {
   }
 }
 
+// ── GENERATE SOLUTION ───────────────────────────────────────────────────────
+function generateSolution(q) {
+  // If the question data contains a predefined explanation, use it
+  if (q.exp) return `<div class="solution-step">${q.exp}</div>`;
+
+  const ansText = q.options[q.answer];
+  let html = '';
+
+  if (q.category === 'Powers & Roots') {
+    if (q.q.includes('√')) {
+      html += `<div class="solution-step">To find the square root, we look for a number <b>x</b> where <b>x × x = ${q.q.match(/\d+/)[0]}</b>.</div>`;
+      html += `<div class="solution-step">Since <b>${ansText} × ${ansText} = ${q.q.match(/\d+/)[0]}</b>, the answer is <b>${ansText}</b>.</div>`;
+    } else if (q.q.includes('∛')) {
+      html += `<div class="solution-step">To find the cube root, we look for a number <b>x</b> where <b>x × x × x = ${q.q.match(/\d+/)[0]}</b>.</div>`;
+      html += `<div class="solution-step">Since <b>${ansText} × ${ansText} × ${ansText} = ${q.q.match(/\d+/)[0]}</b>, the answer is <b>${ansText}</b>.</div>`;
+    } else if (q.q.includes('²')) {
+      const base = q.q.match(/\d+/)[0];
+      html += `<div class="solution-step">Squaring a number means multiplying it by itself.</div>`;
+      html += `<div class="solution-step"><b>${base} × ${base} = ${ansText}</b>.</div>`;
+    } else if (q.q.includes('³')) {
+      const base = q.q.match(/\d+/)[0];
+      html += `<div class="solution-step">Cubing a number means multiplying it by itself twice.</div>`;
+      html += `<div class="solution-step"><b>${base} × ${base} × ${base} = ${ansText}</b>.</div>`;
+    } else {
+      html += `<div class="solution-step">The correct answer is mathematically evaluated to <b>${ansText}</b>.</div>`;
+    }
+  } else if (q.category === 'Reasoning') {
+    html += `<div class="solution-step">Analyze the pattern or logic in the sequence.</div>`;
+    html += `<div class="solution-step">Following the logical progression, the next value is <b>${ansText}</b>.</div>`;
+  } else {
+    html += `<div class="solution-step">Calculate the expression using standard order of operations.</div>`;
+    html += `<div class="solution-step">The final evaluated result is <b>${ansText}</b>.</div>`;
+  }
+
+  return html;
+}
+
 // ── SOLVE BUTTON ───────────────────────────────────────────────────────────
 document.getElementById('btn-solve').addEventListener('click', () => {
   const q = state.questions[state.currentIdx];
@@ -224,11 +264,19 @@ document.getElementById('btn-solve').addEventListener('click', () => {
   allBtns[q.answer].classList.add('correct');
   
   const feedback = document.getElementById('q-feedback');
-  feedback.textContent = 'The correct answer is: ' + q.options[q.answer];
+  feedback.textContent = 'Solution opened. When ready, click Next.';
   feedback.className = 'q-feedback correct-msg';
 
   document.getElementById('btn-solve').classList.add('hidden');
   document.getElementById('btn-next').classList.remove('hidden');
+
+  // populate and show solution panel
+  document.getElementById('solution-content').innerHTML = generateSolution(q);
+  document.getElementById('solution-panel').classList.add('open');
+});
+
+document.getElementById('btn-close-sol').addEventListener('click', () => {
+  document.getElementById('solution-panel').classList.remove('open');
 });
 
 // ── NEXT QUESTION ──────────────────────────────────────────────────────────
