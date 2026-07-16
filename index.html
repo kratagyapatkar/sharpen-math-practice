@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sharpen — Daily Math & Reasoning Practice</title>
+  <meta name="description" content="Daily bite-sized math and reasoning practice. No pen, no paper. Just your mind." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ── HOME SCREEN ── -->
+  <div id="screen-home" class="screen active">
+    <header class="home-header">
+      <span class="logo">sharpen.</span>
+      <div class="streak-badge" id="streak-badge">🔥 <span id="streak-count">0</span> day streak</div>
+    </header>
+
+    <main class="home-main">
+
+      <!-- Row 1: hero text -->
+      <div class="home-hero">
+        <h1 class="home-title">Train your <em>mind daily.</em></h1>
+        <p class="home-sub">No pen. No paper. Just clear thinking.</p>
+      </div>
+
+      <!-- Row 2: mode cards LEFT  |  wheel RIGHT -->
+      <div class="home-center-row">
+
+        <div class="mode-grid">
+          <button class="mode-card" id="btn-math" data-mode="math">
+            <span class="mode-icon">∑</span>
+            <span class="mode-name">Mathematics</span>
+            <span class="mode-desc">Arithmetic, algebra, fractions</span>
+          </button>
+          <button class="mode-card" id="btn-reasoning" data-mode="reasoning">
+            <span class="mode-icon">◈</span>
+            <span class="mode-name">Reasoning</span>
+            <span class="mode-desc">Patterns, series, logic</span>
+          </button>
+          <button class="mode-card" id="btn-roots" data-mode="roots">
+            <span class="mode-icon">√</span>
+            <span class="mode-name">Powers & Roots</span>
+            <span class="mode-desc">Squares, cubes, roots</span>
+          </button>
+          <button class="mode-card" id="btn-mixed" data-mode="mixed">
+            <span class="mode-icon">⚡</span>
+            <span class="mode-name">Mixed</span>
+            <span class="mode-desc">All topics, daily practice</span>
+          </button>
+        </div>
+
+        <!-- wheel -->
+        <div class="wheel-wrap">
+          <div class="wheel-pointer">▼</div>
+          <canvas id="wheel-canvas" width="230" height="230"></canvas>
+          <button class="spin-btn" id="spin-btn">⚡ Spin!</button>
+          <p class="wheel-hint" id="wheel-hint">Spin or pick a category</p>
+        </div>
+
+      </div>
+
+      <!-- Row 3: settings pills -->
+      <div class="home-settings-row">
+        <div class="pill-select" id="difficulty-select">
+          <button class="pill active" data-value="easy"   id="pill-easy">Easy</button>
+          <button class="pill"        data-value="medium" id="pill-medium">Medium</button>
+          <button class="pill"        data-value="hard"   id="pill-hard">Hard</button>
+        </div>
+        <div class="pill-select" id="count-select">
+          <button class="pill active" data-value="5"  id="pill-5">5 Qs</button>
+          <button class="pill"        data-value="10" id="pill-10">10 Qs</button>
+          <button class="pill"        data-value="20" id="pill-20">20 Qs</button>
+        </div>
+      </div>
+
+    </main>
+  </div>
+
+  <!-- ── QUESTION SCREEN ──
+ -->
+  <div id="screen-question" class="screen">
+    <header class="q-header">
+      <button class="back-btn" id="btn-back">←</button>
+      <div class="progress-wrap">
+        <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+        <span class="progress-label" id="progress-label">1 / 10</span>
+      </div>
+      <div class="timer-pill" id="timer-pill">⏱ <span id="timer-display">0s</span></div>
+    </header>
+
+    <main class="q-main">
+      <div class="q-category-tag" id="q-category-tag">Mathematics</div>
+      <div class="q-card" id="q-card">
+        <p class="q-text" id="q-text">Loading…</p>
+      </div>
+
+      <!-- roots reference table (shown only for root questions) -->
+      <div class="ref-table-wrap hidden" id="ref-table-wrap">
+        <button class="ref-toggle" id="ref-toggle">📋 Reference Table <span id="ref-arrow">▸</span></button>
+        <div class="ref-table-body hidden" id="ref-table-body">
+          <div class="ref-cols">
+            <div class="ref-col">
+              <table class="ref-table">
+                <thead><tr><th>n</th><th>n²</th><th>√n²</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>1</td><td>1</td></tr>
+                  <tr><td>2</td><td>4</td><td>2</td></tr>
+                  <tr><td>3</td><td>9</td><td>3</td></tr>
+                  <tr><td>4</td><td>16</td><td>4</td></tr>
+                  <tr><td>5</td><td>25</td><td>5</td></tr>
+                  <tr><td>6</td><td>36</td><td>6</td></tr>
+                  <tr><td>7</td><td>49</td><td>7</td></tr>
+                  <tr><td>8</td><td>64</td><td>8</td></tr>
+                  <tr><td>9</td><td>81</td><td>9</td></tr>
+                  <tr><td>10</td><td>100</td><td>10</td></tr>
+                  <tr><td>11</td><td>121</td><td>11</td></tr>
+                  <tr><td>12</td><td>144</td><td>12</td></tr>
+                  <tr><td>13</td><td>169</td><td>13</td></tr>
+                  <tr><td>14</td><td>196</td><td>14</td></tr>
+                  <tr><td>15</td><td>225</td><td>15</td></tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="ref-col">
+              <table class="ref-table">
+                <thead><tr><th>n</th><th>n³</th><th>∛n³</th></tr></thead>
+                <tbody>
+                  <tr><td>1</td><td>1</td><td>1</td></tr>
+                  <tr><td>2</td><td>8</td><td>2</td></tr>
+                  <tr><td>3</td><td>27</td><td>3</td></tr>
+                  <tr><td>4</td><td>64</td><td>4</td></tr>
+                  <tr><td>5</td><td>125</td><td>5</td></tr>
+                  <tr><td>6</td><td>216</td><td>6</td></tr>
+                  <tr><td>7</td><td>343</td><td>7</td></tr>
+                  <tr><td>8</td><td>512</td><td>8</td></tr>
+                  <tr><td>9</td><td>729</td><td>9</td></tr>
+                  <tr><td>10</td><td>1000</td><td>10</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="options-grid" id="options-grid">
+        <!-- filled by JS -->
+      </div>
+
+      <div class="q-feedback" id="q-feedback" aria-live="polite"></div>
+
+      <button class="next-btn hidden" id="btn-next">Next →</button>
+    </main>
+  </div>
+
+  <!-- ── RESULTS SCREEN ── -->
+  <div id="screen-results" class="screen">
+    <main class="results-main">
+      <div class="result-emoji" id="result-emoji">🎉</div>
+      <h2 class="results-title" id="results-title">Well done!</h2>
+      <p class="results-sub" id="results-sub">You got 8 out of 10 correct.</p>
+
+      <div class="results-stats">
+        <div class="stat-box">
+          <span class="stat-num" id="stat-correct">8</span>
+          <span class="stat-lbl">Correct</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="stat-wrong">2</span>
+          <span class="stat-lbl">Wrong</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="stat-time">45s</span>
+          <span class="stat-lbl">Time</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num" id="stat-accuracy">80%</span>
+          <span class="stat-lbl">Accuracy</span>
+        </div>
+      </div>
+
+      <div class="results-actions">
+        <button class="btn-primary" id="btn-again">Try Again</button>
+        <button class="btn-outline" id="btn-home">← Home</button>
+      </div>
+    </main>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
