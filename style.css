@@ -634,35 +634,6 @@ body {
     0 12px 40px rgba(255,195,0,0.4);
 }
 
-.spin-btn {
-  padding: 0.75rem 2.6rem;
-  background: var(--gold);
-  color: var(--ink);
-  border: 2px solid var(--gold);
-  border-radius: 999px;
-  font-family: 'Jost', sans-serif;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  letter-spacing: 0.02em;
-  transition: transform 0.12s, box-shadow 0.12s, background 0.15s;
-  box-shadow: 0 4px 16px rgba(255,195,0,0.38);
-}
-
-.spin-btn:hover:not(:disabled) {
-  background: var(--gold-d);
-  border-color: var(--gold-d);
-  transform: scale(1.05);
-  box-shadow: 0 6px 22px rgba(255,195,0,0.5);
-}
-
-.spin-btn:active:not(:disabled) { transform: scale(0.97); }
-
-.spin-btn:disabled {
-  opacity: 0.6;
-  cursor: not-allowed;
-}
-
 .wheel-hint {
   font-size: 0.8rem;
   color: var(--ink-60);

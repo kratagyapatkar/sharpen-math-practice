@@ -353,9 +353,7 @@ function spinWheel() {
   if (spinning) return;
   spinning = true;
 
-  const btn  = document.getElementById('spin-btn');
   const hint = document.getElementById('wheel-hint');
-  btn.disabled = true;
   hint.textContent = '🎰 Spinning…';
   hint.classList.remove('winning');
 
@@ -383,8 +381,6 @@ function spinWheel() {
 
       hint.textContent = `🎯 ${winner.label}! Starting in a moment…`;
       hint.classList.add('winning');
-      btn.textContent  = '⚡ Spin!';
-      btn.disabled     = false;
 
       setTimeout(() => {
         document.querySelectorAll('.mode-card').forEach(c => c.classList.remove('selected'));
@@ -392,7 +388,7 @@ function spinWheel() {
         if (card) card.classList.add('selected');
         state.mode = winner.mode;
         startSession();
-        hint.textContent = 'Feeling lucky? Let the wheel choose your practice!';
+        hint.textContent = 'Tap or swipe to spin';
         hint.classList.remove('winning');
       }, 1400);
     }
@@ -401,9 +397,28 @@ function spinWheel() {
   requestAnimationFrame(frame);
 }
 
-// also spin when canvas is clicked
+// spin when canvas is clicked or swiped
 canvas.addEventListener('click', spinWheel);
-document.getElementById('spin-btn').addEventListener('click', spinWheel);
+
+let touchStartX = 0;
+let touchStartY = 0;
+
+canvas.addEventListener('touchstart', (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+  touchStartY = e.changedTouches[0].screenY;
+}, { passive: true });
+
+canvas.addEventListener('touchend', (e) => {
+  const touchEndX = e.changedTouches[0].screenX;
+  const touchEndY = e.changedTouches[0].screenY;
+  
+  const dx = Math.abs(touchEndX - touchStartX);
+  const dy = Math.abs(touchEndY - touchStartY);
+  
+  if (dx > 20 || dy > 20) {
+    spinWheel();
+  }
+});
 
 // initial draw
 drawWheel(0);
