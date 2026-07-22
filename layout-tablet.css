@@ -1,0 +1,114 @@
+/* ═══════════════════════════════════════════════════════════════
+   layout-tablet.css — Layout for tablets (601px – 900px)
+═══════════════════════════════════════════════════════════════ */
+
+/* ── Header ─────────────────────────────────────────────────── */
+.home-header  { display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 1.6rem; border-bottom: 1px solid var(--ink-10); flex-shrink: 0; }
+.logo         { font-size: 1.75rem; }
+.streak-badge { padding: 0.3rem 0.9rem; font-size: 0.8rem; }
+
+/* ── Home main ───────────────────────────────────────────────── */
+.home-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem 1.6rem;
+  gap: 1.2rem;
+  overflow: hidden;
+  animation: fadeUp .7s ease forwards;
+}
+
+/* ── Hero ────────────────────────────────────────────────────── */
+.home-hero  { text-align: center; flex-shrink: 0; }
+.home-title { font-family: 'DM Serif Display', serif; font-size: 2.4rem; line-height: 1.1; color: var(--ink); }
+.home-title em { font-style: italic; color: var(--gold-d); }
+.home-sub   { font-size: 0.85rem; color: var(--ink-60); margin-top: 0.3rem; }
+
+/* ── Center row: wheel stacked above 4-col cards ─────────────── */
+.home-center-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.1rem;
+  width: 100%;
+  max-width: 600px;
+  flex-shrink: 0;
+}
+
+/* wheel on top */
+.wheel-wrap { gap: 0.55rem; order: -1; }
+.wheel-pointer { font-size: 1.1rem; }
+#wheel-canvas  { width: 185px !important; height: 185px !important; }
+.wheel-hint    { font-size: 0.78rem; }
+
+/* 4-across mode grid */
+.mode-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.6rem;
+  width: 100%;
+}
+.mode-card  { padding: 0.85rem 0.6rem; gap: 0.3rem; border-radius: 13px; }
+.mode-icon  { font-size: 1.3rem; }
+.mode-name  { font-size: 0.82rem; }
+.mode-desc  { display: none; } /* hide description to keep row compact */
+
+/* ── Settings pills ──────────────────────────────────────────── */
+.home-settings-row { gap: 0.6rem; }
+.pill { padding: 0.32rem 0.9rem; font-size: 0.8rem; }
+
+/* ── Question screen ─────────────────────────────────────────── */
+.q-header  { padding: 0.85rem 1.4rem; gap: 0.8rem; }
+.back-btn  { padding: 0.32rem 0.85rem; font-size: 0.95rem; }
+.progress-wrap { gap: 0.65rem; }
+.progress-label { font-size: 0.78rem; }
+.timer-pill     { padding: 0.26rem 0.7rem; font-size: 0.78rem; }
+
+.q-main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 1.2rem 1.4rem;
+  gap: 1rem;
+  max-width: 700px;
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.q-card  { border-radius: 20px; padding: 2rem 1.6rem; min-height: 140px; }
+.q-text  { font-size: 1.8rem; }
+
+.options-grid { grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+.option-btn   { padding: 0.9rem 0.75rem; font-size: 0.95rem; border-radius: 13px; }
+
+.q-feedback { font-size: 0.88rem; }
+.q-actions  { padding-bottom: 0.9rem; }
+.next-btn   { padding: 0.7rem 2rem; font-size: 0.92rem; }
+.solve-btn  { padding: 0.7rem 2rem; font-size: 0.92rem; }
+
+/* ── Solution panel ──────────────────────────────────────────── */
+.solution-panel  { max-height: 55vh; padding: 1.3rem 1.4rem 1.8rem; }
+.solution-header h3 { font-size: 1.25rem; }
+.close-btn { font-size: 1.6rem; padding: 0.2rem 0.4rem; }
+.solution-content { font-size: 0.92rem; line-height: 1.5; padding: 0.45rem 0; }
+
+/* ── Ref panel ───────────────────────────────────────────────── */
+.ref-side-panel { width: 55vw; max-width: 320px; }
+.ref-table-body { padding: 1.4rem 1rem; }
+
+/* ── Results ─────────────────────────────────────────────────── */
+.results-main    { gap: 1.3rem; padding: 2rem 1.4rem; }
+.result-emoji    { font-size: 3rem; }
+.results-title   { font-size: 2.4rem; }
+.results-sub     { font-size: 0.95rem; margin-top: -0.5rem; }
+.results-stats   { gap: 0.75rem; }
+.stat-box        { padding: 0.85rem 1.1rem; min-width: 80px; gap: 0.25rem; }
+.stat-num        { font-size: 1.65rem; }
+.stat-lbl        { font-size: 0.7rem; }
+.results-actions { gap: 0.7rem; margin-top: 0.5rem; }
+.btn-primary, .btn-outline { padding: 0.7rem 2rem; font-size: 0.95rem; }

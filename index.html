@@ -8,7 +8,12 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Jost:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <!-- Base styles: tokens, resets, shared components -->
   <link rel="stylesheet" href="style.css" />
+  <!-- Device-specific layouts -->
+  <link rel="stylesheet" href="layout-mobile.css"  media="screen and (max-width: 600px)" />
+  <link rel="stylesheet" href="layout-tablet.css"  media="screen and (min-width: 601px) and (max-width: 900px)" />
+  <link rel="stylesheet" href="layout-desktop.css" media="screen and (min-width: 901px)" />
 </head>
 <body>
 
@@ -105,7 +110,7 @@
 
       <div class="q-feedback" id="q-feedback" aria-live="polite"></div>
 
-      <div class="q-actions" style="display: flex; gap: 1rem;">
+      <div class="q-actions">
         <button class="solve-btn hidden" id="btn-solve">Solve</button>
         <button class="next-btn hidden" id="btn-next">Next →</button>
       </div>
